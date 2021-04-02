@@ -5,7 +5,5 @@
 <p  align="center">A lightweight Discord client which uses GTK3 for the user interface. Rewritten in typescript.</p>
 
 </p>
-
-A Discord client written in typescript
 --
 This project is in the early stages where the only thing here is the hello world window
