@@ -49,10 +49,7 @@ class Application {
 }
 
 export function New(app){
-    const { plugins, err } = Plugins.loadPlugins();
-    if(err){
-        console.error(`Failed to load plugins: ${err}`);
-    }
-
+    const plugins = Plugins.loadPlugins();
+    
     return Application
 }

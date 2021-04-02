@@ -46,4 +46,6 @@ export function loadPlugins(){
         var plugin = loadPlugin(path + file);
         plugins.push(plugin);
     }
+
+    return plugins;
 }
