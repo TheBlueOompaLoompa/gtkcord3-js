@@ -1,5 +1,5 @@
 import { homedir } from 'os';
-import { mkdirSync, existsSync, readdirSync } from 'fs';
+import { mkdirSync, existsSync, readdirSync, readFileSync } from 'fs';
 
 export const WindowWidth	=	1000
 export const WindowHeight	=	700
@@ -39,4 +39,21 @@ export function mustRead(dir:string) {
     }
 
     return { files: readdirSync(dir, { withFileTypes: true }), path: dir, undefined };
+}
+
+export function UnmarshalFromFile(file: string): Map<string, {channelId, isDM}> {
+    file = path + file;
+    if(!existsSync(file)){
+        return null;
+    }
+    var f = readFileSync(file, 'utf-8');
+
+    var ret: Map<string, {channelId, isDM}>;
+    try {
+        ret = new Map<string, {channelId, isDM}>(JSON.parse(f));
+    } catch (error) {
+        ret = new Map<string, {channelId, isDM}>();
+        console.log(error);
+    }
+    return ret;
 }
