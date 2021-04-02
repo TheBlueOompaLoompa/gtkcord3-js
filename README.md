@@ -2,7 +2,7 @@
 	
 <img width="128" src="logo.png" />
 <h1 align="center">gtkcord-js</h1>
-<p  align="center">A lightweight Discord client which uses GTK3 for the user interface. Rewritten in typescript.</p>
+<p  align="center">A lightweight Discord client which uses GTK4 for the user interface. Rewritten in typescript.</p>
 
 </p>
 
