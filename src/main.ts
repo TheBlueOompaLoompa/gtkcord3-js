@@ -1,5 +1,3 @@
-import * as config from './gtkcord/config/config';
-
 import * as gi from 'node-gtk';
 const GLib = gi.require('GLib', '2.0');
 const Gtk = gi.require('Gtk', '4.0');

@@ -1,5 +1,5 @@
 {
-  "name": "gtkcord3",
+  "name": "gtkcord4",
   "version": "0.0.0",
   "description": "A Discord client written in typescript",
   "main": "src/main.js",
