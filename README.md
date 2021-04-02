@@ -1,11 +1,11 @@
 <p align="center">
 	
 <img width="128" src="logo.png" />
-<h1 align="center">gtkcord-js</h1>
+<h1 align="center">gtkcord4-js</h1>
 <p  align="center">A lightweight Discord client which uses GTK4 for the user interface. Rewritten in typescript.</p>
 
 </p>
 
 ***
 
-This project is in the early stages where the only thing here is the hello world window
+This project is in the early stages where the only thing here is the hello world window. Also oops I didn't realize I should name this gtkcord4 :/
