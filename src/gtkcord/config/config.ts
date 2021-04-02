@@ -27,12 +27,16 @@ function init() {
     path = homedir() + '/gktcord';
 
     if(!existsSync(path)){
-        mkdirSync(path, {mode: '0o775'});
+        mkdirSync(path, { mode: '0o775' });
     }
 }
 
 export function mustRead(dir:string) {
     dir = path + dir;
 
-    return { files: readdirSync(dir), path: dir, undefined };
+    if(!existsSync(dir)){
+        mkdirSync(path, { mode: '0o775' })
+    }
+
+    return { files: readdirSync(dir, { withFileTypes: true }), path: dir, undefined };
 }
