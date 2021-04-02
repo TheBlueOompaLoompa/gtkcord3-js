@@ -1,4 +1,5 @@
 import * as Plugins from './plugins';
+import * as LastRead from './config/lastread/lastread';
 
 const SettingsFile = "settings.json";
 const LastReadFile = "lastread.json";
@@ -40,7 +41,7 @@ class Application {
 	// guilds.
     lastRead// LastRead
 
-    constructor(Application, Plugins, LastRead, Settings){
+    constructor(Application, Plugins, LastRead){
         this.app = Application;
         this.plugins = Plugins;
         this.lastRead = LastRead;
@@ -50,6 +51,18 @@ class Application {
 
 export function New(app){
     const plugins = Plugins.loadPlugins();
-    
-    return Application
+
+    return new Application(app, plugins, LastRead.New(LastReadFile));
+}
+
+export function Close(app) {
+    app.app = undefined;
+
+    if(app.state != undefined){
+        app.state.Close();
+    }
+}
+
+export function Activate(app) {
+    // TODO: add dbus integration
 }
