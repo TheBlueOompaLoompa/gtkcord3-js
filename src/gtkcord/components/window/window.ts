@@ -1,10 +1,12 @@
-import { Header } from './header';
+import { LoadHeader } from './header';
+import { Header } from '../header/header';
 import * as Settings from '../settings/settings';
 
 export class gWindow {
     window;
     app;
 
+    lHeader: LoadHeader;
     header: Header;
     main;
 
@@ -16,14 +18,14 @@ export class gWindow {
         this.window = new Gtk.ApplicationWindow(application);
         this.window.setTitle('Gtkcord4');
         this.window.setDefaultSize(Settings.WindowWidth, Settings.WindowHeight);
-        this.window.on('destroy', onQuit);
+        this.window.on('close-request', onQuit);
 
         // Create header
-        this.header = new Header(Gtk);
-        this.header.Show();
-        this.window.setTitlebar(this.header.headerBar);
+        this.lHeader = new LoadHeader(Gtk);
+        this.lHeader.Show();
+        this.window.setTitlebar(this.lHeader.headerBar);
 
-        this.window.setChild(this.header.main);
+        this.window.setChild(this.lHeader.main);
     }
 
     show() {

@@ -1,6 +1,6 @@
 import { Loading } from './loading';
 
-export class Header {
+export class LoadHeader {
     headerBar;   // Gtk.HeaderBar
     main;       // Gtk.Stack
     Gtk
