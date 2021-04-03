@@ -19,7 +19,11 @@ export class gWindow {
         this.window.on('destroy', onQuit);
 
         // Create header
-        this.header = new Header({ window: this.window });
+        this.header = new Header(Gtk);
+        this.header.Show();
+        this.window.setTitlebar(this.header.headerBar);
+
+        this.window.setChild(this.header.main);
     }
 
     show() {

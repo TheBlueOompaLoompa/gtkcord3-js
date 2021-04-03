@@ -1,23 +1,44 @@
-import * as gi from 'node-gtk';
-const Handy = gi.require('Handy');
-const Gtk = gi.require('Gtk', '4.0');
+import { Loading } from './loading';
 
 export class Header {
-    titleBar;   // handy: TitleBar
-    main;       // gtk: Stack
-    constructor(pointers){
-        this.titleBar = new Handy.TitleBar();
+    headerBar;   // Gtk.HeaderBar
+    main;       // Gtk.Stack
+    Gtk
+    constructor(Gtk){
+        this.Gtk = Gtk;
 
+        // Setup headerbar
+        this.headerBar = new Gtk.HeaderBar();
+        this.headerBar.setTitleWidget(new Gtk.Label({ label: 'Connecting to discord' }));
+
+        // Create view stack
         this.main = new Gtk.Stack();
-        this.main.setTransitionDuration(200);
-        console.log(Object.keys(Gtk.Stack))
-        //this.main.setTransitionType(Gtk.GTK_STACK_TRANSITION_TYPE_CROSSFADE);
+        this.main.setTransitionType(Gtk.StackTransitionType.CROSSFADE);
 
-        pointers.window.setTitlebar(this.titleBar);
+        // Add loading screen
+        this.main.addNamed(new Loading(Gtk).spinner, 'loading');
+        this.main.setVisibleChildName('loading');
     }
 
     Show(){
-        this.titleBar.show();
+        this.headerBar.show();
         this.main.show();
+    }
+
+    SetTitle(title: string){
+        this.headerBar.setTitleWidget(new this.Gtk.Label({ label: title }));
+    }
+
+    DisplayMain(widget){
+        // Check if loading
+        var isLoading = this.main.getVisibleChildName() == 'loading';
+
+        // Update main
+        this.main.remove(this.main.getChildByName('main'));
+        this.main.addNamed(widget, 'main');
+        this.main.setVisibleChild('main');
+
+        // Remove loading widget
+        if(isLoading){ this.main.remove(this.main.getChildByName('loading')); }
     }
 }
