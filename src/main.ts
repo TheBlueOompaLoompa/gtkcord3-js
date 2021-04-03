@@ -1,7 +1,8 @@
 import * as gi from 'node-gtk';
-import { gWindow } from './gtkcord/components/window/window';
 const GLib = gi.require('GLib', '2.0');
 const Gtk = gi.require('Gtk', '4.0');
+
+import { gWindow } from './gtkcord/components/window/window';
 
 function main(){
 	const loop = GLib.MainLoop.new(null, false);
