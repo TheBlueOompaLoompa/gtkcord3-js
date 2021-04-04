@@ -2,11 +2,18 @@ import * as gi from 'node-gtk';
 const GLib = gi.require('GLib', '2.0');
 const Gtk = gi.require('Gtk', '4.0');
 
+import { Client } from 'discord.io';
+
 import { gWindow } from './gtkcord/components/window/window';
 import { Login, tryLoadToken } from './gtkcord/login/login';
+import { Header } from './gtkcord/components/header/header';
+
+import { loginWithToken } from './gtkcord/discord/discord';
 
 const loop = GLib.MainLoop.new(null, false);
 const app = new Gtk.Application('com.oompa.gtkcord4', 0);
+
+var client: Client;
 
 function onQuit() {
 	loop.quit();
@@ -31,6 +38,15 @@ async function main(){
 			login.show();
 		}
 		else {
+			loginWithToken(token, (c: Client) => {
+				client = c;
+				loop.quit();
+				window.header = new Header(Gtk);
+				window.header.show();
+				window.window.setTitlebar(window.header.main);
+				loop.run();
+				console.log('Updating header');
+			});
 			window.show();
 		}
 
@@ -41,6 +57,7 @@ async function main(){
 	const status = app.run([]);
 
 	console.log('Finished with status:', status);
+	process.exit(0);
 }
 
 main()
