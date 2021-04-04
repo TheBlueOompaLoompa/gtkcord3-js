@@ -1,3 +1,5 @@
+import * as pswd from 'keytar';
+
 export class Login {
     window; // Gtk.window
     
@@ -8,50 +10,65 @@ export class Login {
     loginButton;// Gtk.button
 
     constructor(Gtk, onQuit: Function, loginCallback: Function) {
-        // Create window
-        this.window = new Gtk.Window();
-        this.window.setTitle('Discord Login');
-        this.window.setModal(true);
-        this.window.setDefaultSize(350, 150);
-        this.window.on('close-request', onQuit);
+        var token = this.loadToken();
+        if(token){
+            loginCallback();
+        }else{
+            // Create window
+            this.window = new Gtk.Window();
+            this.window.setTitle('Discord Login');
+            this.window.setModal(true);
+            this.window.setDefaultSize(350, 150);
+            this.window.on('close-request', onQuit);
 
+            // Create main box
+            this.main = new Gtk.Box({ orientation: 1 });
+            this.main.setMarginTop(25);
+            this.main.setMarginBottom(25);
+            this.main.setSizeRequest(320, 100);
+            this.main.setHalign(Gtk.Align.CENTER);
+            this.main.setSpacing(5);
 
-        // Create main box
-        this.main = new Gtk.Box({ orientation: 1 });
-        this.main.setMarginTop(25);
-        this.main.setMarginBottom(25);
-        this.main.setSizeRequest(320, 100);
-        this.main.setHalign(Gtk.Align.CENTER);
-        this.main.setSpacing(5);
+            // Create description
+            this.description = new Gtk.Label({ label: 'Discord login token:' });
+            this.description.show();
+            this.main.append(this.description);
 
-        // Create description
-        this.description = new Gtk.Label({ label: 'Discord login token:' });
-        this.description.show();
-        this.main.append(this.description);
+            // Create token input
+            this.tokenInput = new Gtk.Entry();
+            this.tokenInput.show();
+            this.main.append(this.tokenInput);
 
-        // Create token input
-        this.tokenInput = new Gtk.Entry();
-        this.tokenInput.show();
-        this.main.append(this.tokenInput);
+            // Create login button
+            this.loginButton = new Gtk.Button({ label: 'Login' });
+            this.loginButton.show();
+            this.main.append(this.loginButton);
+            
+            // Make the login button work
+            this.loginButton.on('clicked', event => {
+                this.window.hide();
 
-        // Create login button
-        this.loginButton = new Gtk.Button({ label: 'Login' });
-        this.loginButton.show();
-        this.main.append(this.loginButton);
-        
-        // Make the login button work
-        this.loginButton.on('clicked', event => {
-            this.window.hide();
-            loginCallback(this.tokenInput.getText());
-        });
+                // Save token and login
+                token = this.tokenInput.getText();
+                loginCallback(token);
+            });
 
-        // Add main to window
-        this.main.show();
-        this.window.setChild(this.main);
+            // Add main to window
+            this.main.show();
+            this.window.setChild(this.main);
+        }
     }
 
-    show(){
+    show() {
         this.window.show();
         this.window.present();
+    }
+
+    async loadToken() {
+        var token = await pswd.findPassword('com.oompa.gtkcord3');
+        if(token != null) {
+            return token;
+        }
+        return undefined;
     }
 }
