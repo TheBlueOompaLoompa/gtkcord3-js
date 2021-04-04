@@ -8,4 +8,8 @@
 
 ***
 
-This project is in the early stages where the only thing here is the hello world window. Also oops I didn't realize I should name this gtkcord4 :/
+This project is in the early stages the real functionality doesn't work so please don't think you can use this yet. Also oops I didn't realize I should name this gtkcord4 :/
+
+<p align="center">
+<img width="1024" src="Screenshot.png" />
+</p>
