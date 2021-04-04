@@ -3,6 +3,8 @@ import { Header } from '../header/header';
 import * as Settings from '../settings/settings';
 
 export class gWindow {
+    Gtk;
+
     window;
     app;
 
@@ -13,6 +15,9 @@ export class gWindow {
     fileCSS;
 
     constructor(Gtk, application, onQuit) {
+        // Save gtk for later
+        this.Gtk = Gtk;
+
         this.app = application;
         // Create window from application
         this.window = new Gtk.ApplicationWindow(application);
@@ -22,7 +27,7 @@ export class gWindow {
 
         // Create header
         this.lHeader = new LoadHeader(Gtk);
-        this.lHeader.Show();
+        this.lHeader.show();
         this.window.setTitlebar(this.lHeader.headerBar);
 
         this.window.setChild(this.lHeader.main);
@@ -31,5 +36,12 @@ export class gWindow {
     show() {
         this.window.show();
 		this.window.present();
+    }
+
+    loggedIn(){
+        this.header = new Header(this.Gtk);
+        this.header.show();
+        this.lHeader.DisplayMain(this.header.main);
+        console.log('Updating header');
     }
 }
