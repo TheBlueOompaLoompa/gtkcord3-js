@@ -56,7 +56,7 @@ export class Login {
     }
 
     saveToken(token) {
-        setPassword('com.oompa.gtkcord3', 'discord', token);
+        setPassword('com.oompa.gtkcord4', 'discord', token);
     }
 
     show() {
@@ -66,5 +66,5 @@ export class Login {
 }
 
 export function tryLoadToken() {
-    return findPassword('com.oompa.gtkcord3');
+    return findPassword('com.oompa.gtkcord4');
 }

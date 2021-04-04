@@ -6,7 +6,7 @@ import { gWindow } from './gtkcord/components/window/window';
 import { Login, tryLoadToken } from './gtkcord/login/login';
 
 const loop = GLib.MainLoop.new(null, false);
-const app = new Gtk.Application('com.oompa.gtkcord3', 0);
+const app = new Gtk.Application('com.oompa.gtkcord4', 0);
 
 function onQuit() {
 	loop.quit();
