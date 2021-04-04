@@ -9,6 +9,7 @@ export class LoadHeader {
 
         // Setup headerbar
         this.headerBar = new Gtk.HeaderBar();
+        this.headerBar.setShowTitleButtons(true)
         this.headerBar.setTitleWidget(new Gtk.Label({ label: 'Connecting to discord' }));
 
         // Create view stack
@@ -20,9 +21,14 @@ export class LoadHeader {
         this.main.setVisibleChildName('loading');
     }
 
-    Show(){
+    show() {
         this.headerBar.show();
         this.main.show();
+    }
+
+    hide() {
+        this.headerBar.hide();
+        this.main.hide();
     }
 
     SetTitle(title: string){
