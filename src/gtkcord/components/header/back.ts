@@ -12,7 +12,5 @@ export class Back {
         this.revealer = new Gtk.Revealer();
         this.revealer.setChild(this.button);
         this.revealer.setRevealChild(false);
-
-        main.addController(new Gtk.EventController());
     }
 }
