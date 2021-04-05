@@ -6,78 +6,75 @@ export class Header {
 
     main; // Gtk.Box
 
-    // Left: hamburger and guild name:
-    leftSide;   // Gtk.HeaderBar
-    leftContainer;  // Gtk.Box
-    hamburger: MainHamburger;
+    guildNameHeader;    // Gtk.HeaderBar
     guildName;  // Gtk.Label
 
-    separator;  // Gtk.Separator
-
-    // Right: channel name only.
-    rightSide;  // Gtk.HeaderBar
-    rightContainer; // Gtk.Box
+    // Right
+    backHeader; // Gtk.HeaderBar
     back: Back;
+    channelNameHeader   // Gtk.HeaderBar
     channelName;// Gtk.Label
+    chMenuBtnHeader;    // Gtk.HeaderBar
     chMenuBtn: ChMenuButton;
+
+    hamburgerHeader;    // Gtk.HeaderBar
+    hamburger: MainHamburger;
 
     constructor(Gtk) {
         this.Gtk = Gtk;
-
         this.main = new Gtk.Box();
 
         /*
          * Left side
         */
 
-        // Create left header bar
-        this.leftSide = new Gtk.HeaderBar();
-        this.leftSide.setShowTitleButtons(false);
-
-        // Create container
-        this.leftContainer = new Gtk.Box();
-
         // Add hamburger button
         this.hamburger = new MainHamburger(Gtk);
-        this.leftContainer.append(this.hamburger.button);
+        // Header
+        this.hamburgerHeader = new Gtk.HeaderBar();
+        this.hamburgerHeader.setShowTitleButtons(false);
+        this.hamburgerHeader.setTitleWidget(this.hamburger.button);
+        this.hamburgerHeader.show();
 
         // Add guild name widget
         this.guildName = new Gtk.Label({ label: 'gtkcord4' });
-        this.guildName.setMarginStart(10);
         this.guildName.show();
-        this.leftContainer.append(this.guildName);
+        // Header
+        this.guildNameHeader = new Gtk.HeaderBar();
+        this.guildNameHeader.setShowTitleButtons(false);
+        this.guildNameHeader.setTitleWidget(this.guildName);
+        this.guildNameHeader.show();
         
         // Show left side
-        this.leftContainer.show();
-        this.leftSide.setTitleWidget(this.leftContainer);
-        this.leftSide.show();
-        this.main.append(this.leftSide);
-
-        // Add separator
-        this.main.append(new Gtk.Separator());
+        this.main.append(this.hamburgerHeader);
+        this.main.append(this.guildNameHeader);
 
         /*
          * Right side
         */
 
-        // Create right header bar
-        this.rightSide = new Gtk.HeaderBar();
-        this.rightSide.setHexpand(true);
-        this.rightSide.setShowTitleButtons(true);
-
-        // Create container
-        this.rightContainer = new Gtk.Box();
-        this.rightContainer.setHexpand(true);
-
         // Add back button
-        this.back = new Back(Gtk);
-        this.rightContainer.append(this.back.button);
+        this.back = new Back(Gtk, this.main);
+        // Header
+        this.backHeader = new Gtk.HeaderBar();
+        this.backHeader.setShowTitleButtons(false);
+        this.backHeader.setTitleWidget(this.back.revealer);
+        this.backHeader.show();
+
+        // Add channel name widget
+        this.channelName = new Gtk.Label({ label: '' });
+        this.channelName.setHexpand(true);
+        this.channelName.show();
+        // Header
+        this.channelNameHeader = new Gtk.HeaderBar();
+        this.channelNameHeader.setShowTitleButtons(true);
+        this.channelNameHeader.setTitleWidget(this.channelName);
+        this.channelNameHeader.setHexpand(true);
+        this.channelNameHeader.show();
 
         // Show right side
-        this.rightContainer.show();
-        this.rightSide.setTitleWidget(this.rightContainer);
-        this.rightSide.show();
-        this.main.append(this.rightSide);
+        this.main.append(this.backHeader);
+        this.main.append(this.channelNameHeader);
     }
 
     show() {
@@ -85,8 +82,6 @@ export class Header {
     }
 
     setGuild(name: string) {
-        this.leftContainer.remove(this.guildName);
         this.guildName.setText(name);
-        this.leftContainer.append(this.guildName);
     }
 }
