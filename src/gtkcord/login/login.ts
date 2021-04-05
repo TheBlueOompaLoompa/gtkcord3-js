@@ -41,7 +41,7 @@ export class Login {
         this.main.append(this.loginButton);
         
         // Make the login button work
-        this.loginButton.on('clicked', event => {
+        this.loginButton.on('clicked', () => {
             this.window.hide();
 
             // Save token and login
@@ -55,16 +55,16 @@ export class Login {
         this.window.setChild(this.main);
     }
 
-    saveToken(token) {
+    saveToken(token: string): void {
         setPassword('com.oompa.gtkcord4', 'discord', token);
     }
 
-    show() {
+    show(): void {
         this.window.show();
         this.window.present();
     }
 }
 
-export function tryLoadToken() {
+export function tryLoadToken(): Promise<string> {
     return findPassword('com.oompa.gtkcord4');
 }

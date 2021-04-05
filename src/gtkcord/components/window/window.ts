@@ -33,12 +33,12 @@ export class gWindow {
         this.window.setChild(this.lHeader.main);
     }
 
-    show() {
+    show(): void {
         this.window.show();
 		this.window.present();
     }
 
-    loggedIn(){
+    loggedIn(): void {
         this.header = new Header(this.Gtk);
         this.header.show();
         this.lHeader.DisplayMain(this.header.main);

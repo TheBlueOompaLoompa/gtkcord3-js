@@ -1,8 +1,8 @@
 import { Loading } from './loading';
 
 export class LoadHeader {
-    headerBar;   // Gtk.HeaderBar
-    main;       // Gtk.Stack
+    headerBar:  Gtk.HeaderBar;
+    main:       Gtk.Stack;
     Gtk
     constructor(Gtk){
         this.Gtk = Gtk;
@@ -21,28 +21,28 @@ export class LoadHeader {
         this.main.setVisibleChildName('loading');
     }
 
-    show() {
+    show(): void {
         this.headerBar.show();
         this.main.show();
     }
 
-    hide() {
+    hide(): void {
         this.headerBar.hide();
         this.main.hide();
     }
 
-    SetTitle(title: string){
+    SetTitle(title: string): void {
         this.headerBar.setTitleWidget(new this.Gtk.Label({ label: title }));
     }
 
-    DisplayMain(widget){
+    DisplayMain(widget): void {
         // Check if loading
         var isLoading = this.main.getVisibleChildName() == 'loading';
 
         // Update main
         this.main.remove(this.main.getChildByName('main'));
         this.main.addNamed(widget, 'main');
-        this.main.setVisibleChild('main');
+        this.main.setVisibleChildName('main');
 
         // Remove loading widget
         if(isLoading){ this.main.remove(this.main.getChildByName('loading')); }

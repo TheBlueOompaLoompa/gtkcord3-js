@@ -4,21 +4,24 @@ import { Back } from './back';
 export class Header {
     Gtk;
 
-    main; // Gtk.Box
+    main: Gtk.Box;
 
-    guildNameHeader;    // Gtk.HeaderBar
-    guildName;  // Gtk.Label
+    // Left
+    hamburgerHeader:    Gtk.HeaderBar;
+    hamburger:          MainHamburger;
+
+    guildNameHeader:    Gtk.HeaderBar;
+    guildName:          Gtk.Label;
 
     // Right
-    backHeader; // Gtk.HeaderBar
-    back: Back;
-    channelNameHeader   // Gtk.HeaderBar
-    channelName;// Gtk.Label
-    chMenuBtnHeader;    // Gtk.HeaderBar
-    chMenuBtn: ChMenuButton;
+    backHeader:         Gtk.HeaderBar;
+    back:               Back;
 
-    hamburgerHeader;    // Gtk.HeaderBar
-    hamburger: MainHamburger;
+    channelNameHeader:  Gtk.HeaderBar;
+    channelName:        Gtk.Label;
+
+    chMenuBtnHeader:    Gtk.HeaderBar
+    chMenuBtn:          ChMenuButton;    
 
     constructor(Gtk) {
         this.Gtk = Gtk;
@@ -54,7 +57,7 @@ export class Header {
         */
 
         // Add back button
-        this.back = new Back(Gtk, this.main);
+        this.back = new Back(Gtk);
         // Header
         this.backHeader = new Gtk.HeaderBar();
         this.backHeader.setShowTitleButtons(false);
@@ -77,11 +80,11 @@ export class Header {
         this.main.append(this.channelNameHeader);
     }
 
-    show() {
+    show(): void {
         this.main.show();
     }
 
-    setGuild(name: string) {
+    setGuild(name: string): void {
         this.guildName.setText(name);
     }
 }

@@ -1,5 +1,5 @@
 export class MainHamburger {
-    button;
+    button: Gtk.Button;
 
     constructor(Gtk){
         this.button = new Gtk.Button();

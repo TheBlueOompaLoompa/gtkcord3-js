@@ -1,8 +1,8 @@
 export class Back {
-    revealer;   // Gtk.Revealer
-    button; // Gtk.Button
+    revealer:   Gtk.Revealer;
+    button:     Gtk.Button;
 
-    constructor(Gtk, main) {
+    constructor(Gtk) {
         // Create button
         this.button = new Gtk.Button();
         this.button.setIconName('go-previous-symbolic');

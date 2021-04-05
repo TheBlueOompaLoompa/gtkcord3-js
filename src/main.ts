@@ -15,13 +15,13 @@ const app = new Gtk.Application('com.oompa.gtkcord4');
 
 var client: Client;
 
-function onQuit() {
+function onQuit(): boolean {
 	loop.quit();
 	app.quit();
 	return false;
 }
 
-async function main(){
+async function main() {
 	// Try to get the token from keyring
 	var token = await tryLoadToken();
 	
