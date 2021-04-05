@@ -4,10 +4,10 @@ export class Login {
     window; // Gtk.window
     
     // Window Contents
-    main;   // Gtk.box
-    description;// Gtk.label
-    tokenInput; // Gtk.entry
-    loginButton;// Gtk.button
+    main: Gtk.Box;
+    description: Gtk.Label;
+    tokenInput: Gtk.Entry;
+    loginButton: Gtk.Button;
 
     constructor(Gtk, onQuit: Function, loginCallback: Function) {
         // Create window
