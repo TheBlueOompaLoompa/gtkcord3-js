@@ -11,7 +11,7 @@ import { Header } from './gtkcord/components/header/header';
 import { loginWithToken } from './gtkcord/discord/discord';
 
 const loop = GLib.MainLoop.new(null, false);
-const app = new Gtk.Application('com.oompa.gtkcord4', 0);
+const app = new Gtk.Application({applicationId: 'com.oompa.gtkcord4'});
 
 var client: Client;
 
